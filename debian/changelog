@@ -1,0 +1,328 @@
+ruby-sequel (5.42.0-1) unstable; urgency=medium
+
+  * New upstream version 5.42.0
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Thu, 04 Mar 2021 13:25:55 -0800
+
+ruby-sequel (5.41.0-1) unstable; urgency=low
+
+  * New upstream version 5.41.0
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Tue, 09 Feb 2021 14:33:05 -0800
+
+ruby-sequel (5.40.0-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Cédric Boutillier ]
+  * Update team name
+  * Add .gitattributes to keep unwanted files out of the source package
+
+  [ Sergio de Almeida Cipriano Junior ]
+  * New upstream version 5.40.0
+  * d/watch: Bump version to 4
+  * d/control:
+    - Bump debhelper-compat to 13
+    - Bump Standards-Version to 4.5.1
+    - Add ruby-minitest-global-expectations as dependency
+  * d/patches
+    - Remove patch that removes minitest-global-expectations
+    - Update patch 0001 due to new upstream version
+
+ -- Sergio de Almeida Cipriano Junior <sergiosacj@hotmail.com.br>  Sat, 16 Jan 2021 11:38:23 -0300
+
+ruby-sequel (5.29.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control:
+    - Bump Standards-Version to 4.5.0, no changes required.
+  * debian/patches:
+    - Add patch to drop the usage of minitest-global_expectations in the
+      specs. This one is currently not packaged in Debian, and the reason
+      upstream is using it is dealing with deprecation warnings. This will
+      need to be revisit in the future.
+
+ -- Georg Faerber <georg@debian.org>  Wed, 05 Feb 2020 09:52:24 +0000
+
+ruby-sequel (5.23.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control:
+    - Bump Standards-Version to 4.4.0, no changes required.
+    - Bump debhelper-compat to 12.
+    - Use my debian.org mail address.
+
+  [ Utkarsh Gupta ]
+  * Add salsa-ci.yml
+
+ -- Georg Faerber <georg@debian.org>  Mon, 26 Aug 2019 13:19:40 +0000
+
+ruby-sequel (5.15.0-1) unstable; urgency=medium
+
+  * New upstream release:
+    - Fixes the service parameter keyword of the PostgreSQL adapter.
+      (Closes: #911123)
+  * debian/compat:
+    - Drop obsolete compat file.
+  * debian/control:
+    - Add build dependency on debhelper-compat.
+    - Bump Standards-Version to 4.2.1.
+    - Declare that the build doesn't need root privileges.
+  * debian/patches:
+    - Refresh for new release.
+  * debian/rules:
+    - Make the build verbose.
+
+ -- Georg Faerber <georg@riseup.net>  Sun, 16 Dec 2018 18:10:30 +0000
+
+ruby-sequel (5.6.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Fixes spec failures with ruby 2.5. (Closes: #892507)
+  * debian/control:
+    - Add myself as Uploader.
+    - Bump required debhelper version to >= 11~.
+    - Use salsa.debian.org in Vcs-{Browser,Git} fields.
+    - Bump Standards-Version to 4.1.3, no changes needed.
+    - Add Testsuite field to enable autopkgtest.
+    - Add build dependencies as needed by specs.
+  * debian/compat: Bump debhelper compat level to 11.
+  * debian/copyright:
+    - Use HTTPS in link to copyright format specification.
+    - Fix link to upstream source.
+    - Bump years to include 2018 and add missing authors.
+    - Remove section about unused file.
+  * debian/patches: Upstream uses 'require_relative' in specs. This fails if
+    running autopkgtest, as lib/ is moved away. Accordingly, add a patch to
+    use 'require' instead of 'require_relative'.
+
+ -- Georg Faerber <georg@riseup.net>  Sun, 18 Mar 2018 05:21:37 +0100
+
+ruby-sequel (4.37.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Imported Upstream version 4.37.0
+    - fixes test failure during build (Closes: #832861)
+  * Bump Standards-Version to 3.9.8; no changes needed.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sun, 07 Aug 2016 09:05:14 -0300
+
+ruby-sequel (4.33.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Fri, 08 Apr 2016 17:56:19 -0700
+
+ruby-sequel (4.32.0-1) unstable; urgency=low
+
+  [ Cédric Boutillier ]
+  * Bump debhelper compatibility level to 9.
+  * Use https:// in Vcs-* fields.
+  * Run wrap-and-sort on packaging files.
+
+  [ Dmitry Borodaenko ]
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 26 Mar 2016 10:44:51 -0700
+
+ruby-sequel (4.31.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Standards-Version upgraded to 3.9.7, no changes required.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Mon, 08 Feb 2016 19:48:08 -0800
+
+ruby-sequel (4.15.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Standards-Version upgraded to 3.9.6, no changes required.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 18 Oct 2014 11:17:35 -0700
+
+ruby-sequel (4.11.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Transitional packages removed (Closes: #735713).
+  * Standards-Version upgraded to 3.9.5 (no changes).
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sun, 08 Jun 2014 13:20:56 -0700
+
+ruby-sequel (4.1.1-1) unstable; urgency=low
+
+  [ Dmitry Borodaenko ]
+  * New upstream release.
+  * Standards-Version upgraded to 3.9.4 (no changes).
+  * Added Build-Depend on ruby-sqlite3.
+
+  [ Cédric Boutillier ]
+  * debian/control: remove obsolete DM-Upload-Allowed flag.
+  * use canonical URI in Vcs-* fields.
+  * debian/copyright: use DEP5 copyright-format/1.0 official URL for Format
+    field.
+  * Update debian/watch. Thanks Bart Martens.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 10 Aug 2013 18:38:17 -0700
+
+ruby-sequel (3.37.0-1) unstable; urgency=low
+
+  * New upstream release:
+    - added Build-Depends and Depends on ruby-json.
+  * Bump Build-Depends on gem2deb to >= 0.3.0~.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sun, 15 Jul 2012 15:24:05 +0300
+
+ruby-sequel (3.36.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 09 Jun 2012 13:49:15 +0300
+
+ruby-sequel (3.35.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 05 May 2012 14:45:33 +0300
+
+ruby-sequel (3.34.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Mon, 09 Apr 2012 16:55:39 +0300
+
+ruby-sequel (3.33.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Standards-Version upgraded to 3.9.3.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 03 Mar 2012 21:11:50 +0300
+
+ruby-sequel (3.32.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sun, 12 Feb 2012 15:16:19 +0300
+
+ruby-sequel (3.31.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Point Vcs-* control fields at git.debian.org.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sun, 08 Jan 2012 18:12:38 +0300
+
+ruby-sequel (3.30.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Switch to gem2deb-based packaging.
+    - source and binary packages renamed to ruby-redcloth
+    - transitional packages added
+    - source format changed to 3.0 (quilt).
+  * Redirect watch file to GitHub.
+
+ -- Dmitry Borodaenko <angdraug@debian.org>  Sat, 24 Dec 2011 18:14:45 +0300
+
+libsequel-ruby (3.13.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control
+     + Bumped Standard version to 3.9.0(no changes).
+
+ -- Deepak Tripathi <apenguinlinux@gmail.com>  Mon, 12 Jul 2010 14:30:40 +0530
+
+libsequel-ruby (3.12.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch
+     + updated to alioth's gemwatch.
+  * debian/copyright
+     + updated upsteam author's information.
+     + updated homepage.
+  * debain/control
+     + Bumped Standard version to 3.8.4(no changes).
+     + updated Homepage.
+  * debian/
+     + added libsequel-ruby.docs
+
+ -- Deepak Tripathi <apenguinlinux@gmail.com>  Tue, 06 Jul 2010 15:38:05 +0530
+
+libsequel-ruby (3.6.0-4) unstable; urgency=low
+
+  * New maintainer (Closes: #570796)
+  * debian/control
+     + keeping under pkg-ruby-extra group.
+     + added DMUA flag.
+     + added vcs-* entry.
+     + updated description of dummy package.
+  * Switch to dpkg-source 3.0 (quilt) format.
+     + added debian/source/format
+  * debian/
+     + removed libsequel-ruby1.9.debhelper.log.
+     + removed libsequel-ruby.substvars.
+     + removed source.lintian-overrides.
+     + added libsequel-ruby1.8.manpages.
+     + added libsequel-ruby1.9.1.manpages.
+     + written man page sequel.1.
+  * debian/copyright
+     + added Debian's specific copyright information.
+     + updated upstream's copyright information.
+  * debian/rules
+     + added man page entry for binary specific.
+
+ -- Deepak Tripathi <apenguinlinux@gmail.com>  Tue, 25 May 2010 14:47:34 +0530
+
+libsequel-ruby (3.6.0-3) unstable; urgency=low
+
+  * Orphaning.
+
+ -- Sebastien Delafond <seb@debian.org>  Sun, 21 Feb 2010 14:22:54 +0100
+
+libsequel-ruby (3.6.0-2) unstable; urgency=low
+
+  * Move to ruby1.9.1 (Closes: #569848).
+  * Bumped up Standards-Version.
+  * Removed unused lintian override.
+
+ -- Sebastien Delafond <seb@debian.org>  Tue, 16 Feb 2010 11:12:01 +0100
+
+libsequel-ruby (3.6.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sebastien Delafond <seb@debian.org>  Fri, 20 Nov 2009 16:00:40 +0100
+
+libsequel-ruby (3.5.0-2) unstable; urgency=low
+
+  * Relax Build-Dep on debhelper.
+  * Fix duplicate /usr/bin/sequel between the ruby1.8 and 1.9 packages
+    (Closes: #550627).
+
+ -- Sebastien Delafond <seb@debian.org>  Mon, 12 Oct 2009 17:33:29 +0200
+
+libsequel-ruby (3.5.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Switched to cdbs & ruby-pkg-tools.
+  * Bumped up Standards revision.
+  * Added Homepage: field.
+
+ -- Sebastien Delafond <seb@debian.org>  Thu, 08 Oct 2009 14:14:46 +0200
+
+libsequel-ruby (3.0.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Depend on rubygems (Closes: #529583).
+  * Conflict with libsequel-core-ruby.
+  * Bumped up standards revision and debhelper compatibility level.
+  * Changed section to "ruby".
+  * Added watch file.
+
+ -- Sebastien Delafond <seb@debian.org>  Wed, 20 May 2009 02:24:59 -0700
+
+libsequel-ruby (1.5.1-1) unstable; urgency=low
+
+  * Initial Release (Closes: #478783)
+
+ -- Sebastien Delafond <seb@debian.org>  Wed, 07 May 2008 09:36:27 -0700

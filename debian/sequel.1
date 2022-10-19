@@ -1,0 +1,53 @@
+.TH sequel 1 "May 25, 2010"
+.SH NAME
+sequel \- The Database Toolkit for Ruby
+.SH SYNOPSIS
+.B sequel
+<uri|path> [options]
+.SH DESCRIPTION
+Sequel is a lightweight database access toolkit for Ruby.
+.SH OPTIONS
+.TP 8
+.B \-C, \-\-copy-databases             
+Copy one database to another
+.TP 8
+.B \-d, \-\-dump-migration             
+Print database migration to STDOUT
+.TP 8
+.B \-D, \-\-dump-migration-same-db     
+Print database migration to STDOUT without type translation                      
+.TP 8
+.B \-e, \-\-env ENV                    
+Use environment config for database                      
+.TP 8
+.B \-l, \-\-log logfile                
+Log SQL statements to log file                 
+.TP 8
+.B \-L, \-\-load-dir DIR               
+Loads all *.rb under specified directory                
+.TP 8
+.B \-m, \-\-migrate-directory DIR      
+Run the migrations in directory                
+.TP 8
+.B \-M, \-\-migrate-version VER        
+Migrate the database to version given               
+.TP 8
+.B \-N, \-\-no-test-connection         
+Do not test the connection             
+.TP 8
+.B \-t, \-\-trace                      
+Output the full backtrace if an exception is raised       
+.TP 8
+.B \-?, \-h, \-\-help                  
+Show this message
+.TP 8
+.B \-v, \-\-version                    
+Show version
+.SH SEE ALSO
+This program is shipped as part of the lisequel\-ruby1.8 library
+package, you can check its corresponding documentation can be found in
+the libsquel\-ruby\-doc package.
+.SH AUTHOR
+This manual page was written by Deepak Tripathi <apenguinlinux@gmail.com>, based
+on the command\-line output of this program, for the Debian GNU/Linux
+system (but may be freely used by others).

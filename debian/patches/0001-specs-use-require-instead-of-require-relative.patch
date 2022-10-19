@@ -1,0 +1,168 @@
+From: Georg Faerber <georg@riseup.net>
+Last-Update: Sat, 16 Jan 2021 11:30:31 -0300
+Forwarded: not-yet
+Subject: specs: Use 'require', instead of 'require_relative'
+ Upstream uses 'require_relative' within the specs. This makes running
+ the specs via autopkgtest fail, as lib/ is moved away during
+ autopkgtest runs.
+
+ This should be forwarded upstream.
+---
+ spec/adapters/spec_helper.rb          |  2 +-
+ spec/core/connection_pool_spec.rb     |  2 +-
+ spec/core/database_spec.rb            | 16 +++++++++++-----
+ spec/core/spec_helper.rb              |  4 ++--
+ spec/core_extensions_spec.rb          |  2 +-
+ spec/extensions/serialization_spec.rb |  2 +-
+ spec/extensions/spec_helper.rb        |  2 +-
+ spec/integration/spec_helper.rb       |  2 +-
+ spec/model/spec_helper.rb             |  2 +-
+ 9 files changed, 20 insertions(+), 14 deletions(-)
+
+diff --git a/spec/adapters/spec_helper.rb b/spec/adapters/spec_helper.rb
+index db168f3..7acd609 100644
+--- a/spec/adapters/spec_helper.rb
++++ b/spec/adapters/spec_helper.rb
+@@ -7,7 +7,7 @@ if ENV['COVERAGE']
+ end
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../../lib/"))
+-require_relative "../../lib/sequel"
++require "sequel"
+ 
+ begin
+   require_relative "../spec_config"
+diff --git a/spec/core/connection_pool_spec.rb b/spec/core/connection_pool_spec.rb
+index fa73969..b160e75 100644
+--- a/spec/core/connection_pool_spec.rb
++++ b/spec/core/connection_pool_spec.rb
+@@ -1,5 +1,5 @@
+ require_relative "spec_helper"
+-require_relative '../../lib/sequel/connection_pool/sharded_threaded'
++require 'sequel/connection_pool/sharded_threaded'
+ 
+ connection_pool_defaults = {:pool_timeout=>5, :max_connections=>4}
+ st_connection_pool_defaults = connection_pool_defaults.merge(:single_threaded=>true)
+diff --git a/spec/core/database_spec.rb b/spec/core/database_spec.rb
+index f3fbafb..3a41bca 100644
+--- a/spec/core/database_spec.rb
++++ b/spec/core/database_spec.rb
+@@ -1614,7 +1614,7 @@ end
+ 
+ describe "A Database adapter with a scheme" do
+   before do
+-    require_relative '../../lib/sequel/adapters/mock'
++    require 'sequel/adapters/mock'
+     @ccc = Class.new(Sequel::Mock::Database)
+     @ccc.send(:set_adapter_scheme, :ccc)
+   end
+@@ -1771,13 +1771,19 @@ end
+ 
+ describe "A broken adapter (lib is there but the class is not)" do
+   before do
+-    @adapter = "blah#{$$}"
+-    @fn = File.join(File.dirname(__FILE__), "../../lib/sequel/adapters/#{@adapter}.rb")
+-    File.open(@fn,'a'){}
++    begin
++      @adapter = "blah#{$$}"
++      @fn = File.join(File.dirname(__FILE__), "../../lib/sequel/adapters/#{@adapter}.rb")
++      File.open(@fn,'a'){}
++    rescue Errno::ENOENT
++    end
+   end
+   
+   after do
+-    File.delete(@fn)
++    begin
++      File.delete(@fn)
++    rescue Errno::ENOENT
++    end
+   end
+   
+   it "should raise an error" do
+diff --git a/spec/core/spec_helper.rb b/spec/core/spec_helper.rb
+index 78fd459..fbbb51b 100644
+--- a/spec/core/spec_helper.rb
++++ b/spec/core/spec_helper.rb
+@@ -6,7 +6,7 @@ if ENV['COVERAGE']
+ end
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../../lib/"))
+-require_relative "../../lib/sequel/core"
++require "sequel/core"
+ 
+ ENV['MT_NO_PLUGINS'] = '1' # Work around stupid autoloading of plugins
+ gem 'minitest'
+@@ -19,6 +19,6 @@ require_relative '../deprecation_helper'
+ if ENV['SEQUEL_COLUMNS_INTROSPECTION']
+   Sequel.extension :columns_introspection
+   Sequel::Database.extension :columns_introspection
+-  require_relative '../../lib/sequel/adapters/mock'
++  require 'sequel/adapters/mock'
+   Sequel::Mock::Dataset.send(:include, Sequel::ColumnsIntrospection)
+ end
+diff --git a/spec/core_extensions_spec.rb b/spec/core_extensions_spec.rb
+index 0f360de..6696d9c 100644
+--- a/spec/core_extensions_spec.rb
++++ b/spec/core_extensions_spec.rb
+@@ -6,7 +6,7 @@ if ENV['COVERAGE']
+ end
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../lib/"))
+-require_relative '../lib/sequel'
++require 'sequel'
+ 
+ Regexp.send(:include, Sequel::SQL::StringMethods)
+ String.send(:include, Sequel::SQL::StringMethods)
+diff --git a/spec/extensions/serialization_spec.rb b/spec/extensions/serialization_spec.rb
+index 58a5e2d..7649c3c 100644
+--- a/spec/extensions/serialization_spec.rb
++++ b/spec/extensions/serialization_spec.rb
+@@ -208,7 +208,7 @@ describe "Serialization plugin" do
+ 
+   it "should handle registration of custom serializer/deserializer pairs" do
+     @c.set_primary_key :id
+-    require_relative '../../lib/sequel/plugins/serialization'
++    require 'sequel/plugins/serialization'
+     Sequel::Plugins::Serialization.register_format(:reverse, proc{|s| s.reverse}, proc{|s| s.reverse})
+     @c.plugin :serialization, :reverse, :abc, :def
+     @c.dataset = @c.dataset.with_fetch(:id => 1, :abc => 'cba', :def => 'olleh')
+diff --git a/spec/extensions/spec_helper.rb b/spec/extensions/spec_helper.rb
+index 20bd981..ea7ed25 100644
+--- a/spec/extensions/spec_helper.rb
++++ b/spec/extensions/spec_helper.rb
+@@ -12,7 +12,7 @@ require 'minitest/hooks/default'
+ require 'minitest/shared_description'
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../../lib/"))
+-require_relative "../../lib/sequel"
++require "sequel"
+ 
+ require_relative "../visibility_checking_after_hook" if ENV['CHECK_METHOD_VISIBILITY']
+ 
+diff --git a/spec/integration/spec_helper.rb b/spec/integration/spec_helper.rb
+index f5ad866..389f1fc 100644
+--- a/spec/integration/spec_helper.rb
++++ b/spec/integration/spec_helper.rb
+@@ -7,7 +7,7 @@ if ENV['COVERAGE']
+ end
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../../lib/"))
+-require_relative "../../lib/sequel"
++require "sequel"
+ 
+ require_relative "../visibility_checking" if ENV['CHECK_METHOD_VISIBILITY']
+ 
+diff --git a/spec/model/spec_helper.rb b/spec/model/spec_helper.rb
+index 2d5930b..61a524c 100644
+--- a/spec/model/spec_helper.rb
++++ b/spec/model/spec_helper.rb
+@@ -1,7 +1,7 @@
+ require_relative "../sequel_warning"
+ 
+ $:.unshift(File.join(File.dirname(File.expand_path(__FILE__)), "../../lib/"))
+-require_relative "../../lib/sequel"
++require "sequel"
+ 
+ Sequel::Deprecation.backtrace_filter = lambda{|line, lineno| lineno < 4 || line =~ /_spec\.rb/}
+ 
